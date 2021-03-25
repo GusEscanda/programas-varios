@@ -19,19 +19,32 @@ def combLetras( letras, largo = 0 ):
                     lista.append( letras[i] + p )
         return lista
 
-def palabrasIngles( dic, letras, largo = 0 ):
+def palabras( letras, largo=0, desde='', hasta='', diccionario=None ):
     lista = []
-    for p in combLetras( letras, largo ):
-        if dic.check(p):
-            lista.append(p)
+    for palabra in combLetras(letras,largo):
+        if desde and palabra < desde:
+            continue
+        if hasta and palabra > hasta:
+            continue
+        if diccionario:
+            if not diccionario.check(palabra):
+                continue
+        lista.append(palabra)
     lista.sort()
-    for p in lista:
-        print(p)
-
+    return lista
+    
 if __name__ == '__main__':
-    d = enchant.Dict("en_US")
+    diccionario = enchant.Dict("en_US")
+    print()
+    filtrarIngles = ( input('Solo palabras en ingles (S/N)? ') in 'sSyY' )
+    desde = input('Filtro Desde (<enter> para no filtrar): ')
+    hasta = input('Filtro Hasta (<enter> para no filtrar): ')
+    print()
     letras = input('Letras : ')
     while letras:
         largo = int( input('largo : ') )
-        palabrasIngles( d, letras, largo )
+        print()
+        for palabra in palabras( letras, largo, desde, hasta, diccionario if filtrarIngles else None ):
+            print(palabra)
+        print()
         letras = input('Letras : ')
