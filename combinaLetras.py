@@ -24,7 +24,7 @@ def palabras( letras, largo=0, desde='', hasta='', diccionario=None ):
     for palabra in combLetras(letras,largo):
         if desde and palabra < desde:
             continue
-        if hasta and palabra > hasta:
+        if hasta and palabra > hasta + 'z': # +'z' facilita las busquedas de palbras que comienzan con algun substring (pongo desde=hasta=<substring> y listo)
             continue
         if diccionario:
             if not diccionario.check(palabra):

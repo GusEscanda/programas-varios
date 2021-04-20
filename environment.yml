@@ -1,0 +1,16 @@
+# Para crear el environment e instalar los paquetes necesarios, una vez descargados los archivos, moverse al directorio y ejectuar:
+#         conda env create
+
+# para actualizar (agregar/sacar/modificar versiones), modificar este archivo y despues ejecutar:
+#         conda env update --prune
+
+
+name: varios
+dependencies:
+  - python  # con python=3.6, por ejemplo, especifico la version. Si no, usa la mas nueva disponible
+  - numpy
+  - pip
+  - pip: # PyPI packages
+    - pyenchant # diccionario, lo uso en combinaLetras
+    - pycountry # para obtener las descripciones de los diccionarios
+
